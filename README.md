@@ -1,2 +1,2 @@
-# family-tree-simulation
-Simulates a family tree using Flask and Pygame.
+# Family Tree Simulation of Life
+This is a web-based simulation that allows users to generate and inspect a virtual family tree. Create a starting family with a matriarch and patriarch and then simulate the progression of generations as the family grows and evolves over time.
