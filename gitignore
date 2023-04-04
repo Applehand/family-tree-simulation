@@ -1,0 +1,29 @@
+# Ignore compiled Python files
+*.pyc
+__pycache__/
+
+# Ignore build directories
+build/
+dist/
+*.egg-info/
+
+# Ignore any generated files
+*.log
+*.png
+*.wav
+*.txt
+
+# Ignore any local configuration files
+config.ini
+
+# Ignore any environment-related files
+venv/
+*.env
+
+# Ignore any IDE-related files
+.vscode/
+.idea/
+
+# Ignore any system-generated files
+.DS_Store
+Thumbs.db
