@@ -2,12 +2,22 @@ import random
 import math
 
 def gen_random_name() -> str:
-    names = ['Janet', 'Nancy', 'Greg', 'Brett', 'Alice', 'Bob', 'Charlie', 'David', 'Emily', 'Frank', 'George', 'Hannah', 'Isaac', 'Jessica', 'Kevin', 'Linda', 'Michael', 'Nathan', 'Olivia', 'Peter', 'Rachel', 'Samantha', 'Thomas', 'Vanessa', 'William', 'Xander', 'Yvonne', 'Zachary', 'Adam', 'Benjamin', 'Catherine', 'Daniel', 'Elizabeth', 'Fiona', 'Gabriel', 'Henry', 'Isabella', 'Jacob', 'Katherine', 'Lucy', 'Maggie', 'Nina', 'Oliver', 'Patrick', 'Quinn', 'Rebecca', 'Sophie', 'Trevor', 'Uma', 'Victoria', 'Wendy', 'Xavier', 'Yvette', 'Zoe']
-    return random.choice(names)
+    names = ['Alex', 'Avery', 'Bailey', 'Charlie', 'Dakota', 'Ellis', 'Emerson', 'Finley', 'Harper', 'Jordan', 'Kai', 'Lee', 'Logan', 'Morgan', 'Parker', 'Reese', 'Rowan', 'Sage', 'Skyler', 'Taylor', 'Zion', 'Adrian', 'Blair', 'Cameron', 'Devon', 'Eli', 'Finn', 'Gale', 'Hayden', 'Indigo', 'Jamie', 'Jesse', 'Kendall', 'Kit', 'Micah', 'Nico', 'Phoenix', 'Remy', 'Riley', 'Sasha', 'Shay', 'Sidney', 'Spencer', 'Tate', 'Toby', 'Yael']
+    choice = random.choice(names)
+    if names:
+        names.remove(choice)
+    else:
+        names = ['Alex', 'Avery', 'Bailey', 'Charlie', 'Dakota', 'Ellis', 'Emerson', 'Finley', 'Harper', 'Jordan', 'Kai', 'Lee', 'Logan', 'Morgan', 'Parker', 'Reese', 'Rowan', 'Sage', 'Skyler', 'Taylor', 'Zion', 'Adrian', 'Blair', 'Cameron', 'Devon', 'Eli', 'Finn', 'Gale', 'Hayden', 'Indigo', 'Jamie', 'Jesse', 'Kendall', 'Kit', 'Micah', 'Nico', 'Phoenix', 'Remy', 'Riley', 'Sasha', 'Shay', 'Sidney', 'Spencer', 'Tate', 'Toby', 'Yael']
+        names.remove(choice)
+    
+    return choice
 
 def gen_random_sex() -> str:
-    sexes = ['Male', 'Female']
+    sexes = ['male', 'female']
     return random.choice(sexes)
 
 def gen_death_probability(age: int) -> float:
-    return 1 - math.exp(-(age/100)**2)
+    return 1 - math.exp(-age/100)
+
+def get_random_probability() -> float:
+    return random.random()

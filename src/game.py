@@ -1,4 +1,1 @@
-
-
-def run_test():
-    return 'Tested.'
+from entities.person import Person

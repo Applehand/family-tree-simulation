@@ -1,13 +1,17 @@
-# Ignore compiled Python files
+# Compiled Python files
 *.pyc
 __pycache__/
 
-# Ignore build directories
+# Build directories
 build/
 dist/
 *.egg-info/
 
-# Ignore any generated files
+# Packages and Modules
+node_modules/
+static/d3/
+
+# Generated files
 *.log
 *.png
 *.wav

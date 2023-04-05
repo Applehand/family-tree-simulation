@@ -1,14 +1,24 @@
-from utils.utils import gen_random_name, gen_random_sex
+from utils.utils import gen_random_name, gen_random_sex, gen_death_probability, get_random_probability
 
 class Person:
     def __init__(self, name: str, age: int, sex: str):
-        self.name = name
-        self.age = age
+        self.name = name or gen_random_name()
+        self.age = age or 0
+        self.sex = sex.lower() or gen_random_sex()
+        self.sig_other = None
         self.spouse = None
         self.children = []
         self.parents = ()
         self.is_alive = True
-        self.sex = sex or gen_random_sex()
+        self.mortality = gen_death_probability(self.age)
+
+    def establish_relationship(self, other):
+        self.sig_other = other
+        other.sig_other = self
+
+    def break_up(self, other):
+        self.sig_other = None
+        other.sig_other = None
 
     def get_married(self, spouse):
         self.spouse = spouse
@@ -19,7 +29,10 @@ class Person:
         spouse.spouse = None
 
     def have_child(self, father):
-        child = Person(gen_random_name(), age=0)
+        if self.sex != 'female':
+            raise ValueError('Only females can give birth.')
+
+        child = Person()
         self.children.append(child)
         father.children.append(child)
         child.parents = (self, father)
@@ -28,7 +41,7 @@ class Person:
     
     def have_birthday(self):
         self.age += 1
-
-    def die(self):
-        self.is_alive = False
-    
+        self.mortality = gen_death_probability(self.age)
+        if get_random_probability() < self.mortality:
+            print(f'{self.name} has died.')
+            self.is_alive = False

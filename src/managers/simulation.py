@@ -1,6 +1,6 @@
 from entities.tree import FamilyTree
 
-class Time:
+class Simulation:
     def __init__(self, family_tree: FamilyTree) -> None:
         self.family_tree = family_tree
 
