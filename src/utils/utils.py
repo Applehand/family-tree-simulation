@@ -1,15 +1,10 @@
 import random
 import math
+from src.sim_data.person_data import names_list
+
 
 def gen_random_name() -> str:
-    names = ['Alex', 'Avery', 'Bailey', 'Charlie', 'Dakota', 'Ellis', 'Emerson', 'Finley', 'Harper', 'Jordan', 'Kai', 'Lee', 'Logan', 'Morgan', 'Parker', 'Reese', 'Rowan', 'Sage', 'Skyler', 'Taylor', 'Zion', 'Adrian', 'Blair', 'Cameron', 'Devon', 'Eli', 'Finn', 'Gale', 'Hayden', 'Indigo', 'Jamie', 'Jesse', 'Kendall', 'Kit', 'Micah', 'Nico', 'Phoenix', 'Remy', 'Riley', 'Sasha', 'Shay', 'Sidney', 'Spencer', 'Tate', 'Toby', 'Yael']
-    choice = random.choice(names)
-    if names:
-        names.remove(choice)
-    else:
-        names = ['Alex', 'Avery', 'Bailey', 'Charlie', 'Dakota', 'Ellis', 'Emerson', 'Finley', 'Harper', 'Jordan', 'Kai', 'Lee', 'Logan', 'Morgan', 'Parker', 'Reese', 'Rowan', 'Sage', 'Skyler', 'Taylor', 'Zion', 'Adrian', 'Blair', 'Cameron', 'Devon', 'Eli', 'Finn', 'Gale', 'Hayden', 'Indigo', 'Jamie', 'Jesse', 'Kendall', 'Kit', 'Micah', 'Nico', 'Phoenix', 'Remy', 'Riley', 'Sasha', 'Shay', 'Sidney', 'Spencer', 'Tate', 'Toby', 'Yael']
-        names.remove(choice)
-    
+    choice = random.choice(names_list)
     return choice
 
 def gen_random_sex() -> str:
@@ -21,3 +16,5 @@ def gen_death_probability(age: int) -> float:
 
 def get_random_probability() -> float:
     return random.random()
+
+print(gen_random_name())

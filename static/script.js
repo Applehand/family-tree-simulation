@@ -1,6 +1,7 @@
 (() => {
     const httpRequest = new XMLHttpRequest();
-  
+    httpRequest.onreadystatechange = handler;
+
     function handler() {
       if (httpRequest.readyState === XMLHttpRequest.DONE) {
         if (httpRequest.status === 200) {
@@ -10,8 +11,6 @@
         }
       }
     }
-
-    httpRequest.onreadystatechange = handler;
 
     function treeConstructor(){
         var tree = d3.hierarchy(httpRequest.responseText)
