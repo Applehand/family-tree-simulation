@@ -1,16 +1,21 @@
-from utils.utils import gen_random_name, gen_random_sex, gen_death_probability, get_random_probability
+from src.utils.utils import gen_random_name, gen_random_sex, gen_death_probability, get_random_probability
+from json import dumps
 
 class Person:
-    def __init__(self, name: str, age: int, sex: str):
+
+    def __init__(self, name=None, age=0, sex=None):
         self.name = name or gen_random_name()
-        self.age = age or 0
-        self.sex = sex.lower() or gen_random_sex()
+        self.age = age
+        self.sex = sex or gen_random_sex()
         self.sig_other = None
         self.spouse = None
+        self.ex_spouses = []
         self.children = []
         self.parents = ()
+        self.relationships = {}
         self.is_alive = True
         self.mortality = gen_death_probability(self.age)
+
 
     def establish_relationship(self, other):
         self.sig_other = other
@@ -28,7 +33,7 @@ class Person:
         self.spouse = None
         spouse.spouse = None
 
-    def have_child(self, father):
+    def have_child_with(self, father):
         if self.sex != 'female':
             raise ValueError('Only females can give birth.')
 
@@ -45,3 +50,20 @@ class Person:
         if get_random_probability() < self.mortality:
             print(f'{self.name} has died.')
             self.is_alive = False
+
+    def get_person_json(self):
+        person_dict = {
+            "name": self.name,
+            "age": self.age,
+            "sex": self.sex,
+            "sig_other": self.sig_other,
+            "spouse": self.spouse,
+            "ex-spouses": self.ex_spouses,
+            "children": [child.name for child in self.children],
+            "parents": [parent.name for parent in self.parents],
+            "relationships": self.relationships,
+            "is_alive": self.is_alive,
+            "mortality": self.mortality
+        }
+        
+        return dumps(person_dict)

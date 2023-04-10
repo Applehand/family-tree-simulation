@@ -1,2 +1,2 @@
 # Family Tree Simulation of Life
-This is a web-based simulation that allows users to generate and inspect a virtual family tree. Begin with a matriarch and patriarch and then simulate the progression of generations as the family grows and evolves over time.
+This is a web application that allows users to build and engage with a dynamic simulation of a family's legacy. To begin, users create a family's matriarch and patriarch, and then influence the family's progress and transformation as additional individuals, and soon generations, are born over time.

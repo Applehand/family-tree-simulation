@@ -1,8 +1,13 @@
+import os
+import sys
 from flask import Flask, render_template, send_file
 from dotenv import load_dotenv
-import os
 
 load_dotenv()
+
+project_path = os.getenv('PROJECTPATH')
+sys.path.append(project_path)
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -11,5 +16,5 @@ def base():
 
 @app.route("/test")
 def test():
-    file_path = os.path.join(app.root_path, 'test.json')
-    return send_file(file_path)
+    return 'Test'
+
