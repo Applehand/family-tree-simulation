@@ -6,7 +6,7 @@ from json import dumps
 class FamilyTree():
 
     def __init__(self, dynasty_name: str, matriarch: Person, patriarch: Person):
-        self.graph = nx.MultiGraph(name=dynasty_name)
+        self.graph = nx.DiGraph(name=dynasty_name)
         self.name = dynasty_name
         self.members = []
         matriarch.spouse = patriarch
@@ -24,8 +24,7 @@ class FamilyTree():
             if sibling == member:
                 continue
             self.graph.add_edge(member, sibling, relationship="Sibling")
-        
-
+            
     def remove_member(self, member):
         self.graph.remove_node(member)
         self.members.remove(member)
@@ -33,6 +32,10 @@ class FamilyTree():
     def draw_graph(self):
         nx.draw(self.graph, with_labels=True)
         plt.show()
+
+    def update_relationships(self):
+        for member in self.members:
+            pass
 
     def get_tree_json(self):
         nodes = []
@@ -48,6 +51,7 @@ class FamilyTree():
                 "name": node.name,
                 "age": node.age,
                 "sex": node.sex,
+                "birthday": node.birthday,
                 "sig_other": node.sig_other.name if node.sig_other else None,
                 "spouse": node.spouse.name if node.spouse else None,
                 "ex_spouses": [ex_spouse.name for ex_spouse in node.ex_spouses],

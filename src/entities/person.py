@@ -1,4 +1,4 @@
-from src.utils.utils import gen_random_name, gen_random_sex, gen_death_probability, get_random_probability
+from src.utils.utils import gen_random_name, gen_random_sex, gen_death_probability, get_random_probability, gen_random_birthday
 from json import dumps
 
 class Person:
@@ -7,6 +7,7 @@ class Person:
         self.name = name or gen_random_name()
         self.age = age
         self.sex = sex or gen_random_sex()
+        self.birthday = gen_random_birthday(age)
         self.sig_other = None
         self.spouse = None
         self.ex_spouses = []
@@ -15,7 +16,6 @@ class Person:
         self.relationships = {}
         self.is_alive = True
         self.mortality = gen_death_probability(self.age)
-
 
     def establish_relationship(self, other):
         self.sig_other = other
@@ -44,7 +44,7 @@ class Person:
 
         return child
     
-    def have_birthday(self):
+    def age_up(self):
         self.age += 1
         self.mortality = gen_death_probability(self.age)
         if get_random_probability() < self.mortality:
@@ -56,6 +56,7 @@ class Person:
             "name": self.name,
             "age": self.age,
             "sex": self.sex,
+            "birthday": self.birthday,
             "sig_other": self.sig_other,
             "spouse": self.spouse,
             "ex-spouses": self.ex_spouses,
