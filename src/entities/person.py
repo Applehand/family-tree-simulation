@@ -1,29 +1,32 @@
-from src.utils.utils import gen_random_name, gen_random_sex, gen_death_probability, get_random_probability, gen_random_birthday
+from src.utils.utils import get_random_name, get_random_sex, get_death_probability, get_random_birthday, get_random_probability, get_fertility_chance
 from json import dumps
 
 class Person:
 
     def __init__(self, name=None, age=0, sex=None):
-        self.name = name or gen_random_name()
         self.age = age
-        self.sex = sex or gen_random_sex()
-        self.birthday = gen_random_birthday(age)
-        self.sig_other = None
+        self.sex = sex or get_random_sex()
+        self.name = name or get_random_name(self.sex)
+        self.birthday = get_random_birthday(age)
+        self.partner = None
         self.spouse = None
         self.ex_spouses = []
         self.children = []
         self.parents = ()
         self.relationships = {}
         self.is_alive = True
-        self.mortality = gen_death_probability(self.age)
+        self.mortality = get_death_probability(self.age)
 
-    def establish_relationship(self, other):
-        self.sig_other = other
+    def establish_relationship(self, other, tree):
+        self.partner = other
         other.sig_other = self
 
+    def meet_friend(self, friend):
+        print(f'Made friends with {friend.name}')
+
     def break_up(self, other):
-        self.sig_other = None
-        other.sig_other = None
+        self.partner = None
+        other.partner = None
 
     def get_married(self, spouse):
         self.spouse = spouse
@@ -32,32 +35,51 @@ class Person:
     def get_divorced(self, spouse):
         self.spouse = None
         spouse.spouse = None
+        self.ex_spouses.append(spouse)
+        spouse.ex_spouses.append(self)
+
+    def adopt_child(self, child, second_parent):
+        if second_parent:
+            child.parents = (self, second_parent)
+            self.children.append(child)
+            second_parent.children.append(child)
+        else:
+            self.children.append(child)
+            child.parents = (self,)
+
 
     def have_child_with(self, father):
-        if self.sex != 'female':
-            raise ValueError('Only females can give birth.')
-
         child = Person()
         self.children.append(child)
         father.children.append(child)
         child.parents = (self, father)
+        print(f'{child.name} has been born.')
 
         return child
     
     def age_up(self):
         self.age += 1
-        self.mortality = gen_death_probability(self.age)
-        if get_random_probability() < self.mortality:
-            print(f'{self.name} has died.')
-            self.is_alive = False
+
+    def pregnancy_check(self):
+        if self.sex != 'female':
+            return False
+        else:
+            return get_random_probability() < get_fertility_chance(self.age)
+
+    def mortality_check(self):
+        return get_random_probability() < get_death_probability(self.age)
+
+    def has_died(self):
+        print(f'{self.name} has died.')
+        self.is_alive = False
 
     def get_person_json(self):
         person_dict = {
-            "name": self.name,
             "age": self.age,
             "sex": self.sex,
+            "name": self.name,
             "birthday": self.birthday,
-            "sig_other": self.sig_other,
+            "partner": self.partner,
             "spouse": self.spouse,
             "ex-spouses": self.ex_spouses,
             "children": [child.name for child in self.children],
@@ -68,3 +90,4 @@ class Person:
         }
         
         return dumps(person_dict)
+    

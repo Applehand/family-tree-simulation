@@ -1,31 +1,3 @@
-names_list = [
-    'Alex',
-    'Avery',
-    'Bailey',
-    'Cameron',
-    'Casey',
-    'Charlie',
-    'Dakota',
-    'Devin',
-    'Drew',
-    'Ellis',
-    'Emerson',
-    'Finley',
-    'Harper',
-    'Hayden',
-    'Jesse',
-    'Jordan',
-    'Kai',
-    'Logan',
-    'Morgan',
-    'Parker',
-    'Quinn',
-    'Reese',
-    'Riley',
-    'Rowan',
-    'Sage',
-    'Taylor'
-]
 relationships = ['''
 Parent: 
 Child: 
